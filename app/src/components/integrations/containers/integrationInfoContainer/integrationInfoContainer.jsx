@@ -28,22 +28,25 @@ export class IntegrationInfoContainer extends Component {
     globalIntegrations: PropTypes.array.isRequired,
     showDefaultErrorNotification: PropTypes.func.isRequired,
     onToggleActive: PropTypes.func,
+    uninstallPlugin: PropTypes.func,
     isGlobal: PropTypes.bool,
   };
 
   static defaultProps = {
     onToggleActive: () => {},
+    uninstallPlugin: () => {},
     isGlobal: false,
   };
 
   render() {
     const {
-      integrationType: { name, details: { version } = {} },
+      integrationType: { name, details: { version } = {}, type },
       integrationType,
       projectIntegrations,
       globalIntegrations,
       onItemClick,
       onToggleActive,
+      uninstallPlugin,
       isGlobal,
     } = this.props;
 
@@ -62,6 +65,8 @@ export class IntegrationInfoContainer extends Component {
           globalIntegrations={globalIntegrations}
           projectIntegrations={projectIntegrations}
           onItemClick={onItemClick}
+          uninstallPlugin={uninstallPlugin}
+          id={type}
           instanceType={name}
           isGlobal={isGlobal}
           title={INTEGRATION_NAMES_TITLES[name]}

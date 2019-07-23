@@ -6,6 +6,7 @@ import {
   SET_PROJECT_INTEGRATIONS,
   FETCH_GLOBAL_INTEGRATIONS_SUCCESS,
   UPDATE_PLUGIN_LOCALLY,
+  REMOVE_PLUGIN_LOCALLY,
   GLOBAL_INTEGRATIONS,
   PROJECT_INTEGRATIONS,
   ADD_GLOBAL_INTEGRATION_SUCCESS,
@@ -58,6 +59,8 @@ export const updatePluginLocallyReducer = (state, { type, payload }) => {
         }
         return item;
       });
+    case REMOVE_PLUGIN_LOCALLY:
+      return state.filter((item) => item.type !== payload);
     default:
       return state;
   }

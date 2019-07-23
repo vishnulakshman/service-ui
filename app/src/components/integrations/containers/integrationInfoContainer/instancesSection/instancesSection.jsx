@@ -75,6 +75,19 @@ const messages = defineMessages({
     id: 'InstancesSection.allGlobalProjects',
     defaultMessage: 'All global {pluginName} projects',
   },
+  uninstallPluginBtn: {
+    id: 'InstancesSection.uninstallPluginBtn',
+    defaultMessage: 'Uninstall',
+  },
+  uninstallPluginTitle: {
+    id: 'InstancesSection.uninstallPluginTitle',
+    defaultMessage: 'Uninstall plugin',
+  },
+  uninstallPluginNote: {
+    id: 'InstancesSection.uninstallPluginNote',
+    defaultMessage:
+      'Remove this plugin from the reportportal-dev workspace and revoke all access and authorizations.',
+  },
 });
 
 @connect(
@@ -101,18 +114,22 @@ export class InstancesSection extends Component {
     addIntegrationAction: PropTypes.func.isRequired,
     accountRole: PropTypes.string.isRequired,
     userRole: PropTypes.string.isRequired,
+    uninstallPlugin: PropTypes.func,
     projectIntegrations: PropTypes.array,
     globalIntegrations: PropTypes.array,
     isGlobal: PropTypes.bool,
     title: PropTypes.string,
+    id: PropTypes.number,
   };
 
   static defaultProps = {
+    uninstallPlugin: () => {},
     projectIntegrations: [],
     globalIntegrations: [],
     projectId: '',
     isGlobal: false,
     title: '',
+    id: null,
   };
 
   multiple = isIntegrationSupportsMultipleInstances(this.props.instanceType);
@@ -182,6 +199,8 @@ export class InstancesSection extends Component {
       accountRole,
       userRole,
       isGlobal,
+      uninstallPlugin,
+      id,
     } = this.props;
     const isProjectIntegrationsExists = !!projectIntegrations.length;
     const disabled = !canUpdateSettings(accountRole, userRole);
@@ -241,6 +260,20 @@ export class InstancesSection extends Component {
                 {formatMessage(messages.addIntegrationButtonTitle)}
               </GhostButton>
             </div>
+          )}
+        {!disabled &&
+          isGlobal && (
+            <Fragment>
+              <h3 className={cx('uninstall-plugin-title')}>
+                {formatMessage(messages.uninstallPluginTitle)}
+              </h3>
+              <p className={cx('uninstall-plugin-note')}>
+                {formatMessage(messages.uninstallPluginNote)}
+              </p>
+              <GhostButton color={'tomato'} roundedCorners onClick={() => uninstallPlugin(id)}>
+                {formatMessage(messages.uninstallPluginBtn)}
+              </GhostButton>
+            </Fragment>
           )}
         {!disabled &&
           !isGlobal && (

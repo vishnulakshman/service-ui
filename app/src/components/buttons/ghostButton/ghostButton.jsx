@@ -38,12 +38,14 @@ export const GhostButton = ({
   tiny,
   notMinified,
   mobileDisabled,
+  roundedCorners,
   grayBorder,
 }) => {
   const classes = cx({
     'ghost-button': true,
     disabled,
     tiny,
+    'rounded-corners': roundedCorners,
     [`color-${color}`]: color,
     'with-icon': icon,
     'mobile-minified': icon && children && !notMinified,
@@ -75,6 +77,7 @@ GhostButton.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   grayBorder: PropTypes.bool,
+  roundedCorners: PropTypes.bool,
 };
 
 GhostButton.defaultProps = {
@@ -90,4 +93,5 @@ GhostButton.defaultProps = {
   type: 'button',
   onClick: () => {},
   grayBorder: false,
+  roundedCorners: false,
 };

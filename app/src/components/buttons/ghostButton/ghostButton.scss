@@ -29,6 +29,10 @@
     }
   }
 
+  &.rounded-corners {
+    border-radius: 2px;
+  }
+
   &.color-topaz:not(.disabled) {
     border-color: $COLOR--topaz;
     color: $COLOR--topaz;
@@ -70,6 +74,21 @@
     &.gray-border {
       border-color: $COLOR--gray-91;
       border-radius: 2px;
+    }
+  }
+
+  &.color-tomato {
+    background-color: $COLOR--tomato;
+    border-color: $COLOR--tomato;
+    color: $COLOR--white-two;
+
+    &:hover:not(.disabled) {
+      background-color: darken($COLOR--tomato, 15%);
+      border-color: darken($COLOR--tomato, 15%);
+    }
+    &:active:not(.disabled) {
+      background-color: darken($COLOR--tomato, 30%);
+      border-color: darken($COLOR--tomato, 30%);
     }
   }
 }

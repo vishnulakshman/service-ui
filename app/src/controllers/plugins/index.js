@@ -3,6 +3,7 @@ export {
   fetchPluginsAction,
   fetchGlobalIntegrationsAction,
   updatePluginLocallyAction,
+  removePluginLocallyAction,
   addIntegrationAction,
   removeIntegrationAction,
   removeProjectIntegrationsByTypeAction,

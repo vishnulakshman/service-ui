@@ -5,6 +5,7 @@ export const FETCH_GLOBAL_INTEGRATIONS = 'fetchGlobalIntegrations';
 export const FETCH_GLOBAL_INTEGRATIONS_SUCCESS = 'fetchGlobalIntegrationsSuccess';
 
 export const UPDATE_PLUGIN_LOCALLY = 'updatePluginLocally';
+export const REMOVE_PLUGIN_LOCALLY = 'removePluginLocally';
 
 export const UPDATE_INTEGRATION = 'updateIntegration';
 export const REMOVE_INTEGRATION = 'removeIntegration';

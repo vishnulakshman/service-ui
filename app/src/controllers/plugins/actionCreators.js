@@ -1,6 +1,7 @@
 import {
   SET_PROJECT_INTEGRATIONS,
   UPDATE_PLUGIN_LOCALLY,
+  REMOVE_PLUGIN_LOCALLY,
   UPDATE_INTEGRATION,
   REMOVE_INTEGRATION,
   ADD_INTEGRATION,
@@ -38,6 +39,11 @@ export const setProjectIntegrationsAction = (projectIntegrations) => ({
 export const updatePluginLocallyAction = (plugin) => ({
   type: UPDATE_PLUGIN_LOCALLY,
   payload: plugin,
+});
+
+export const removePluginLocallyAction = (id) => ({
+  type: REMOVE_PLUGIN_LOCALLY,
+  payload: id,
 });
 
 export const updateIntegrationAction = (data, isGlobal, id, callback) => ({

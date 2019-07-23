@@ -7,7 +7,7 @@ import { URLS } from 'common/urls';
 import { fetch } from 'common/utils';
 import { getPluginsFilter } from 'common/constants/pluginsFilter';
 import { ALL_GROUP_TYPE } from 'common/constants/pluginsGroupTypes';
-import { updatePluginLocallyAction } from 'controllers/plugins';
+import { updatePluginLocallyAction, removePluginLocallyAction } from 'controllers/plugins';
 import { showNotification, NOTIFICATION_TYPES } from 'controllers/notification';
 import { IntegrationBreadcrumbs } from 'pages/common/settingsPage/integrationsTab/integrationBreadcrumbs';
 import {
@@ -43,6 +43,7 @@ const messages = defineMessages({
 @connect(null, {
   showNotification,
   updatePluginLocallyAction,
+  removePluginLocallyAction,
 })
 export class InstalledTab extends Component {
   static propTypes = {
@@ -50,6 +51,7 @@ export class InstalledTab extends Component {
     filterItems: PropTypes.array.isRequired,
     plugins: PropTypes.array.isRequired,
     updatePluginLocallyAction: PropTypes.func.isRequired,
+    removePluginLocallyAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func,
   };
 
@@ -105,6 +107,7 @@ export class InstalledTab extends Component {
             isGlobal
             onToggleActive={(itemData) => this.onToggleActive(itemData)}
             onItemClick={this.installedPluginsSettingsSubPageHandler}
+            uninstallPlugin={(id) => this.uninstallPlugin(id)}
           />
         );
       case INSTALLED_PLUGINS_SETTINGS_SUBPAGE:
@@ -195,6 +198,13 @@ export class InstalledTab extends Component {
       type: INSTALLED_PLUGINS_SUBPAGE,
       data: pageData,
       title: INTEGRATION_NAMES_TITLES[pageData.name] || pageData.name,
+    });
+
+  uninstallPlugin = (id) =>
+    fetch(URLS.pluginUpdate(id), {
+      method: 'DELETE',
+    }).then(() => {
+      this.props.updatePluginLocallyAction(id);
     });
 
   renderFilterMobileBlock = () => (
