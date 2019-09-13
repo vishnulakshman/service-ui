@@ -10,7 +10,7 @@ import {
   PassingRatePerLaunch,
   LaunchExecutionAndIssueStatistics,
   CumulativeTrendChart,
-  ComponentHealthCheckChart,
+  ComponentHealthCheck,
   OverallStatisticsChart,
   InvestigatedTrendChart,
 } from './singleLevelWidgets/charts';
@@ -48,7 +48,7 @@ const CHARTS = {
   [widgetTypes.PROJECT_ACTIVITY]: ProjectActivity,
   [widgetTypes.PRODUCT_STATUS]: ProductStatus,
   [widgetTypes.CUMULATIVE_TREND]: CumulativeTrendChart,
-  [widgetTypes.COMPONENT_HEALTH_CHECK]: ComponentHealthCheckChart,
+  [widgetTypes.COMPONENT_HEALTH_CHECK]: ComponentHealthCheck,
   [widgetTypes.OVERALL_STATISTICS]: OverallStatisticsChart,
   [widgetTypes.INVESTIGATED_PERCENTAGE_OF_LAUNCHES]: InvestigatedTrendChart,
   [widgetTypes.MOST_POPULAR_PATTERNS]: MostPopularPatterns,

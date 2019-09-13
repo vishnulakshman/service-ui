@@ -149,7 +149,6 @@ export class SimpleWidget extends Component {
         ...queryParameters,
         ...params,
       });
-
       url = URLS.widgetMultilevel(activeProject, widgetId, queryParamsString);
     }
     return url;

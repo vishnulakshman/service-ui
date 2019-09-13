@@ -1,11 +1,14 @@
 .list {
   display: flex;
+  flex-wrap: wrap;
+  width: 80%;
 }
 
 .item {
   display: flex;
   align-items: center;
   margin-right: 12px;
+  margin-top: 5px;
   font-family: $FONT-REGULAR;
   font-size: 13px;
   line-height: normal;
@@ -17,6 +20,13 @@
   }
 }
 
+.item-name {
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+};
+
 .link {
   display: flex;
   flex-direction: column;
@@ -24,9 +34,27 @@
   cursor: pointer;
 }
 
+.link-color {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-radius: 2px;
+}
+
 .link-value {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
   font-size: 13px;
   color: $COLOR--black-2;
+}
+
+.link-value-name {
+  max-width: 65px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .link-key {

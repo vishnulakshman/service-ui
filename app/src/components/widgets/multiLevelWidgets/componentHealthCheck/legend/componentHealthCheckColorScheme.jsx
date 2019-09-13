@@ -2,7 +2,7 @@ import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { injectIntl, defineMessages, intlShape } from 'react-intl';
-import styles from './componentHealthCheckChartColorScheme.scss';
+import styles from './componentHealthCheckColorScheme.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +20,7 @@ const messages = defineMessages({
 const MAX_PASSING_RATE_VALUE = 100;
 
 @injectIntl
-export class ComponentHealthCheckChartColorScheme extends PureComponent {
+export class ComponentHealthCheckColorScheme extends PureComponent {
   static propTypes = {
     intl: intlShape.isRequired,
     passingRate: PropTypes.number,

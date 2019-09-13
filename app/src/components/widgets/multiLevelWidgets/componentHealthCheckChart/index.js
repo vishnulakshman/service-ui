@@ -1,1 +1,0 @@
-export { ComponentHealthCheckChart } from './componentHealthCheckChart';
