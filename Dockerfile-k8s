@@ -4,7 +4,7 @@ LABEL maintainer="Andrei Varabyeu <andrei_varabyeu@epam.com>"
 #LABEL version=5.0.0-BETA-8
 
 COPY bin/service-ui /
-COPY app/sl_instrumented /public
+COPY app/build /public
 
 ENV RP_STATICS_PATH=/public
 
