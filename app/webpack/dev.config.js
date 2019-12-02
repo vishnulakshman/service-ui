@@ -26,7 +26,7 @@ module.exports = () => {
     process.exit(1);
   }
   return {
-    devtool: 'eval-sourcemap',
+    devtool: 'source-map',
     mode: 'development',
     module: {
       rules: [

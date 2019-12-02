@@ -6,6 +6,7 @@
 **/*.app.*.js.gz
 **/*.app.*.js.map
 **/*.app.*.js.map.gz
+!**/1.app.*.js
 ./node_modules/
 ./docs/
 ./build/media
