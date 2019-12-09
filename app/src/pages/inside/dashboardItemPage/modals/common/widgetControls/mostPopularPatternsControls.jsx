@@ -58,7 +58,7 @@ const messages = defineMessages({
     defaultMessage: 'Value should have size from 1 to 128',
   },
 });
-const attributeKeyValidator = (message) => bindMessageToValidator(validate.attributeValue, message);
+const attributeKeyValidator = (message) => bindMessageToValidator(validate.attributeKey, message);
 
 @injectIntl
 @connect((state) => ({

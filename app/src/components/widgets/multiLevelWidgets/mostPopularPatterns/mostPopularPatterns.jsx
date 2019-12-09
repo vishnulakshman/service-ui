@@ -89,9 +89,8 @@ export class MostPopularPatterns extends Component {
     const { selectedAttribute } = this.state;
 
     const launchesLimit = widget.contentParameters.itemsCount;
-    const compositeAttribute = `${
-      widget.contentParameters.widgetOptions.attributeKey
-    }:${selectedAttribute}`;
+    const attributeKey = widget.contentParameters.widgetOptions.attributeKey;
+    const compositeAttribute = `${attributeKey}:${selectedAttribute}`;
     const defaultNavigationParams = getDefaultTestItemLinkParams(
       project,
       widget.appliedFilters[0].id,
@@ -99,7 +98,7 @@ export class MostPopularPatterns extends Component {
     );
     const metaParams = this.getNavigationMetaParams(
       patternName,
-      compositeAttribute,
+      attributeKey ? compositeAttribute : undefined,
       launchesLimit,
       widget.contentParameters.widgetOptions.latest,
     );
@@ -136,7 +135,10 @@ export class MostPopularPatterns extends Component {
       }))
       .reverse();
 
-  getDefaultAttribute = (data = []) => (data.length ? this.getAttributes(data)[0].value : null);
+  getDefaultAttribute = (data = []) => {
+    const firstAttribute = data.length ? this.getAttributes(data)[0] : null;
+    return firstAttribute ? firstAttribute.value : null;
+  };
 
   resetWidget = () => {
     this.props.clearQueryParams(() => {
@@ -161,16 +163,18 @@ export class MostPopularPatterns extends Component {
 
     return (
       <div className={cx('popular-patterns')}>
-        <div className={cx('attribute-selector')}>
-          <div className={cx('attribute-label')}>{attributeKey}</div>
-          <div className={cx('attribute-input')}>
-            <InputDropdown
-              options={this.getAttributes(result)}
-              onChange={this.onChangeAttribute}
-              value={selectedAttribute}
-            />
+        {attributeKey && (
+          <div className={cx('attribute-selector')}>
+            <div className={cx('attribute-label')}>{attributeKey}</div>
+            <div className={cx('attribute-input')}>
+              <InputDropdown
+                options={this.getAttributes(result)}
+                onChange={this.onChangeAttribute}
+                value={selectedAttribute}
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className={cx('patterns-grid')}>
           <ScrollWrapper>
             <PatternGrid
