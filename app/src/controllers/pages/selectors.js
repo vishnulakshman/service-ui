@@ -35,6 +35,7 @@ export const currentPathSelector = (state) => {
 
 export const activeDashboardIdSelector = (state) => payloadSelector(state).dashboardId;
 export const projectIdSelector = (state) => payloadSelector(state).projectId;
+export const projectTypeSelector = (state) => payloadSelector(state).projectType;
 export const suiteIdSelector = (state) => payloadSelector(state).suiteId;
 export const filterIdSelector = (state) => payloadSelector(state).filterId || ALL;
 export const testItemIdsSelector = (state) =>

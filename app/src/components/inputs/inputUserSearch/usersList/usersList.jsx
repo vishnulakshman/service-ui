@@ -22,7 +22,7 @@ import styles from './usersList.scss';
 
 const cx = classNames.bind(styles);
 
-export const UsersList = ({ options, selectValue }) => {
+export const UsersList = ({ options, selectValue, projectType }) => {
   if (options[0] && options[0].externalUser) {
     return (
       <div className={cx('users-list')}>
@@ -45,6 +45,8 @@ export const UsersList = ({ options, selectValue }) => {
             userLogin={option.userLogin}
             isAssigned={option.isAssigned}
             userAvatar={option.userAvatar}
+            accountType={option.accountType}
+            projectType={projectType}
           />
         ))}
       </ScrollWrapper>
@@ -55,8 +57,10 @@ export const UsersList = ({ options, selectValue }) => {
 UsersList.propTypes = {
   options: PropTypes.array,
   selectValue: PropTypes.func,
+  projectType: PropTypes.string,
 };
 UsersList.defaultProps = {
   options: [],
   selectValue: () => {},
+  projectType: '',
 };

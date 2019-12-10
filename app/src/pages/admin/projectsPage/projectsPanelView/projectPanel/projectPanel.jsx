@@ -130,6 +130,7 @@ export class ProjectPanel extends Component {
             />
             <ProjectStatisticButton
               projectName={projectName}
+              projectType={entryType}
               onClick={() =>
                 this.props.tracking.trackEvent(ADMIN_PROJECTS_PAGE_EVENTS.STATISTIC_ICON)
               }

@@ -37,6 +37,7 @@ const makeOptions = (options, projectId) =>
     userName: option.fullName || '',
     userLogin: option.userId,
     email: option.email || '',
+    accountType: option.accountType,
     disabled: !!option.assignedProjects[projectId],
     isAssigned: !!option.assignedProjects[projectId],
     userAvatar: URLS.dataUserPhoto(projectId, option.userId, true),
@@ -57,6 +58,7 @@ export const InputUserSearch = ({
   isAdmin,
   onChange,
   projectId,
+  projectType,
   placeholder,
   value,
   error,
@@ -82,7 +84,7 @@ export const InputUserSearch = ({
         />
       }
       onChange={onChange}
-      menuRenderer={({ options, selectValue }) => UsersList({ options, selectValue })}
+      menuRenderer={({ options, selectValue }) => UsersList({ options, selectValue, projectType })}
       isValidNewOption={isValidNewOption}
       newOptionCreator={newOptionCreator}
       promptTextCreator={promptTextCreator}
@@ -94,6 +96,7 @@ export const InputUserSearch = ({
 InputUserSearch.propTypes = {
   isAdmin: PropTypes.bool,
   projectId: PropTypes.string,
+  projectType: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   value: PropTypes.object,
@@ -103,6 +106,7 @@ InputUserSearch.propTypes = {
 InputUserSearch.defaultProps = {
   isAdmin: false,
   projectId: '',
+  projectType: '',
   onChange: () => {},
   placeholder: '',
   value: {},

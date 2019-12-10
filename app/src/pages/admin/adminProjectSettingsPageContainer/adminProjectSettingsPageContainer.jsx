@@ -23,11 +23,17 @@ import { SettingsPage } from 'pages/common/settingsPage';
 export class AdminProjectSettingsPageContainer extends Component {
   static propTypes = {
     projectId: PropTypes.string.isRequired,
+    projectType: PropTypes.string.isRequired,
   };
 
   createTabLink = (tabName) => ({
     type: PROJECT_DETAILS_PAGE,
-    payload: { projectId: this.props.projectId, projectSection: SETTINGS, settingsTab: tabName },
+    payload: {
+      projectId: this.props.projectId,
+      projectSection: SETTINGS,
+      settingsTab: tabName,
+      projectType: this.props.projectType,
+    },
   });
 
   render() {

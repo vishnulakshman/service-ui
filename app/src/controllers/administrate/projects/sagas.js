@@ -96,7 +96,7 @@ function* addProject({ payload: projectName }) {
         values: { name: projectName },
       }),
     );
-    yield put(navigateToProjectSectionAction(projectName, SETTINGS));
+    yield put(navigateToProjectSectionAction(projectName, SETTINGS, PROJECT_TYPE_INTERNAL));
   } catch (err) {
     if (err.errorCode === ERROR_CODES.PROJECT_EXISTS) {
       yield put(

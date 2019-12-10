@@ -37,6 +37,7 @@ export {
   querySelector,
   isInitialDispatchDoneSelector,
   currentPathSelector,
+  projectTypeSelector,
 } from './selectors';
 export { updatePagePropertiesAction } from './actionCreators';
 

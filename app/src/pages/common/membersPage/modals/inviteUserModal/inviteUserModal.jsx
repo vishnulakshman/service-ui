@@ -24,7 +24,7 @@ import { COMMON_LOCALE_KEYS } from 'common/constants/localization';
 import { DEFAULT_PROJECT_ROLE, ROLES_MAP } from 'common/constants/projectRoles';
 import { URLS } from 'common/urls';
 import { fetch, commonValidators } from 'common/utils';
-import { projectIdSelector } from 'controllers/pages';
+import { projectIdSelector, projectTypeSelector } from 'controllers/pages';
 import { isAdminSelector } from 'controllers/user';
 import { showScreenLockAction, hideScreenLockAction } from 'controllers/screenLock';
 import {
@@ -91,6 +91,7 @@ const inviteFormSelector = formValueSelector('inviteUserForm');
       role: DEFAULT_PROJECT_ROLE,
       project: projectIdSelector(state),
     },
+    selectedProjectType: projectTypeSelector(state),
   }),
   {
     showModalAction,
@@ -121,6 +122,7 @@ export class InviteUserModal extends Component {
     hideScreenLockAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     showDefaultErrorNotification: PropTypes.func.isRequired,
+    selectedProjectType: PropTypes.string.isRequired,
     selectedProject: PropTypes.string,
     selectedUser: PropTypes.object,
     isAdmin: PropTypes.bool,
@@ -131,6 +133,7 @@ export class InviteUserModal extends Component {
     intl: {},
     showModalAction: () => {},
     selectedProject: '',
+    projectEntryType: '',
     selectedUser: {},
     isAdmin: false,
     dirty: false,
@@ -250,7 +253,7 @@ export class InviteUserModal extends Component {
     );
 
   render() {
-    const { intl, handleSubmit, selectedProject, isAdmin, data } = this.props;
+    const { intl, handleSubmit, selectedProject, selectedProjectType, isAdmin, data } = this.props;
 
     const okButton = {
       text: intl.formatMessage(COMMON_LOCALE_KEYS.INVITE),
@@ -277,6 +280,7 @@ export class InviteUserModal extends Component {
             <FieldProvider name="user" format={this.formatUser}>
               <FieldErrorHint>
                 <InputUserSearch
+                  projectType={selectedProjectType}
                   projectId={selectedProject}
                   isAdmin={isAdmin}
                   placeholder={intl.formatMessage(messages.inputPlaceholder)}

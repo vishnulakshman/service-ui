@@ -34,6 +34,8 @@ export const projectMembersSelector = (state) => projectInfoSelector(state).user
 
 export const projectCreationDateSelector = (state) => projectInfoSelector(state).creationDate || 0;
 
+export const projectEntryTypeSelector = (state) => projectInfoSelector(state).entryType || '';
+
 export const projectPreferencesSelector = (state) => projectSelector(state).preferences || {};
 
 export const userFiltersSelector = (state) => projectPreferencesSelector(state).filters || [];

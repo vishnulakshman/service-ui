@@ -79,11 +79,12 @@ export const confirmAssignToProject = (project) => ({
   payload: project,
 });
 
-export const navigateToProjectSectionAction = (projectName, section) => ({
+export const navigateToProjectSectionAction = (projectName, section, type) => ({
   type: PROJECT_DETAILS_PAGE,
   payload: {
     projectId: projectName,
     projectSection: section,
+    projectType: type,
     settingsTab: section === SETTINGS ? GENERAL : undefined,
   },
 });

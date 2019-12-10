@@ -27,6 +27,7 @@ import {
   PROJECT_DETAILS_PAGE,
   projectIdSelector,
   projectSectionSelector,
+  projectTypeSelector,
 } from 'controllers/pages';
 import { showModalAction } from 'controllers/modal';
 import { SETTINGS, MEMBERS, EVENTS } from 'common/constants/projectSections';
@@ -68,6 +69,7 @@ const HEADER_BUTTONS = [
   (state) => ({
     projectId: projectIdSelector(state),
     section: projectSectionSelector(state),
+    projectType: projectTypeSelector(state),
   }),
   {
     addProject: addProjectAction,
@@ -85,6 +87,7 @@ export class ProjectsPage extends Component {
     showModal: PropTypes.func.isRequired,
     section: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    projectType: PropTypes.string,
     tracking: PropTypes.shape({
       trackEvent: PropTypes.func,
       getTrackingData: PropTypes.func,
@@ -94,10 +97,11 @@ export class ProjectsPage extends Component {
   static defaultProps = {
     section: undefined,
     projectId: undefined,
+    projectType: undefined,
   };
 
   onHeaderButtonClick = (section) => () => {
-    this.props.navigateToSection(this.props.projectId, section);
+    this.props.navigateToSection(this.props.projectId, section, this.props.projectType);
   };
 
   getBreadcrumbs = () => {
@@ -105,6 +109,7 @@ export class ProjectsPage extends Component {
       intl: { formatMessage },
       projectId,
       section,
+      projectType,
     } = this.props;
 
     const breadcrumbs = [
@@ -121,7 +126,7 @@ export class ProjectsPage extends Component {
         title: projectId,
         link: {
           type: PROJECT_DETAILS_PAGE,
-          payload: { projectId, projectSection: null },
+          payload: { projectId, projectSection: null, projectType },
         },
       });
     }
@@ -185,7 +190,7 @@ export class ProjectsPage extends Component {
   };
 
   renderSection = () => {
-    const { projectId, section } = this.props;
+    const { projectId, section, projectType } = this.props;
 
     if (!projectId) {
       return <Projects />;
@@ -193,7 +198,9 @@ export class ProjectsPage extends Component {
 
     switch (section) {
       case SETTINGS:
-        return <AdminProjectSettingsPageContainer projectId={projectId} />;
+        return (
+          <AdminProjectSettingsPageContainer projectId={projectId} projectType={projectType} />
+        );
       case MEMBERS:
         return <MembersPage />;
       case EVENTS:

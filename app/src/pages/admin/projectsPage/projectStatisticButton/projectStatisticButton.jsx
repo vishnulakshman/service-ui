@@ -20,11 +20,11 @@ import React from 'react';
 import { PROJECT_DETAILS_PAGE } from 'controllers/pages';
 import { Icon } from 'components/main/icon/icon';
 
-export const ProjectStatisticButton = ({ projectName, onClick }) => (
+export const ProjectStatisticButton = ({ projectName, projectType, onClick }) => (
   <Link
     to={{
       type: PROJECT_DETAILS_PAGE,
-      payload: { projectId: projectName },
+      payload: { projectId: projectName, projectType },
     }}
     onClick={onClick}
   >
@@ -34,6 +34,7 @@ export const ProjectStatisticButton = ({ projectName, onClick }) => (
 
 ProjectStatisticButton.propTypes = {
   projectName: PropTypes.string.isRequired,
+  projectType: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 

@@ -17,6 +17,8 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { PROJECT_TYPE_UPSA } from 'common/constants/projectsObjectTypes';
+import { UPSA } from 'common/constants/accountType';
 import DefaultUserImage from 'common/img/default-user-avatar.png';
 import { Image } from 'components/main/image';
 import styles from './userItem.scss';
@@ -31,9 +33,12 @@ const messages = defineMessages({
 });
 
 export const UserItem = injectIntl(
-  ({ intl, userName, userLogin, userAvatar, isAssigned, onClick }) => (
+  ({ intl, userName, userLogin, userAvatar, isAssigned, onClick, accountType, projectType }) => (
     <div
-      className={cx({ 'user-search-result-wrap': true, 'disabled-item': isAssigned })}
+      className={cx({
+        'user-search-result-wrap': true,
+        'disabled-item': isAssigned || (projectType === PROJECT_TYPE_UPSA && accountType === UPSA),
+      })}
       onClick={onClick}
     >
       <Image className={cx('user-avatar')} src={userAvatar} fallback={DefaultUserImage} />
@@ -42,7 +47,11 @@ export const UserItem = injectIntl(
         <p className={cx('user-search-login')}>{userLogin}</p>
       </div>
       <button
-        className={cx({ 'assign-btn': true, 'assigned-user': isAssigned })}
+        className={cx({
+          'assign-btn': true,
+          'assigned-user': isAssigned,
+          'upsa-user': projectType === PROJECT_TYPE_UPSA && accountType === UPSA,
+        })}
         title={isAssigned ? intl.formatMessage(messages.isAssigned) : ''}
       />
     </div>
@@ -56,6 +65,8 @@ UserItem.propTypes = {
   userAvatar: PropTypes.string,
   isAssigned: PropTypes.bool,
   onClick: PropTypes.func,
+  accountType: PropTypes.string,
+  projectType: PropTypes.string,
 };
 
 UserItem.defaultProps = {
@@ -65,4 +76,6 @@ UserItem.defaultProps = {
   userAvatar: '',
   isAssigned: false,
   onClick: () => {},
+  accountType: '',
+  projectType: '',
 };
