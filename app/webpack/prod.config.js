@@ -19,6 +19,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
   mode: 'production',
   module: {
     rules: [
@@ -67,7 +68,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash:6].css',
+      filename: '[name].css',
     }),
     new CompressionPlugin({
       algorithm: 'gzip',

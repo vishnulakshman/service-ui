@@ -25,7 +25,7 @@ module.exports = {
   entry: [path.resolve(__dirname, '../src/index.jsx')],
   output: {
     path: path.resolve(__dirname, '../build'),
-    filename: 'app.[hash:6].js',
+    filename: 'app.js',
     publicPath: '',
   },
   resolve: {

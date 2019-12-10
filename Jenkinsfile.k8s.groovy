@@ -101,14 +101,14 @@ podTemplate(
                         stage ('Init Sealights') {
                             sh "./node_modules/.bin/slnodejs config --tokenfile $sealightsTokenPath --appname service-ui --branch $branchToBuild --build $srvVersion"
                             sealightsSession = utils.execStdout("cat buildSessionId")
-                            sh "./node_modules/.bin/slnodejs build --tokenfile $sealightsTokenPath --buildSessionId $sealightsSession --workspacepath './src' --scm none --excludedpaths '**/*.test.js' --es6Modules"
+                            sh "./node_modules/.bin/slnodejs build --tokenfile $sealightsTokenPath --buildsessionid $sealightsSession --workspacepath build --instrumentForBrowsers --outputpath sl_instrumented --scm none --es6Modules"
                         }
                         stage ('Start Sealights') {
-                            sh "./node_modules/.bin/slnodejs start --tokenfile $sealightsTokenPath --buildSessionId $sealightsSession --testStage 'Unit Tests'"
+                            sh "./node_modules/.bin/slnodejs start --tokenfile $sealightsTokenPath --buildsessionid $sealightsSession --teststage 'Unit Tests'"
                             sh "./node_modules/.bin/jest --coverage --testResultsProcessor=$resultsProcessor"
-                            sh "./node_modules/.bin/slnodejs nycReport --tokenfile $sealightsTokenPath --buildSessionId $sealightsSession"
-                            sh "./node_modules/.bin/slnodejs uploadReports --tokenfile $sealightsTokenPath --buildSessionId $sealightsSession --reportFile junit.xml"
-                            sh "./node_modules/.bin/slnodejs end --tokenfile $sealightsTokenPath --buildSessionId $sealightsSession"
+                            sh "./node_modules/.bin/slnodejs nycReport --tokenfile $sealightsTokenPath --buildsessionid $sealightsSession --report './coverage/coverage-final.json'"
+                            sh "./node_modules/.bin/slnodejs uploadReports --tokenfile $sealightsTokenPath --buildsessionid $sealightsSession --reportFile junit.xml"
+                            sh "./node_modules/.bin/slnodejs end --tokenfile $sealightsTokenPath --buildsessionid $sealightsSession"
                         }
                     }
                 }
@@ -138,7 +138,7 @@ podTemplate(
                 dir(k8sChartDir) {
                     sh 'helm dependency update'
                 }
-                sh "helm upgrade --reuse-values --set serviceui.repository=$srvRepo --set serviceui.tag=$srvVersion --wait reportportal ./$k8sChartDir"
+                sh "helm upgrade -n reportportal --reuse-values --set serviceui.repository=$srvRepo --set serviceui.tag=$srvVersion --wait reportportal ./$k8sChartDir"
             }
         }
     }
