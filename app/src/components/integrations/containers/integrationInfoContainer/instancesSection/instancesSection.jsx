@@ -29,6 +29,7 @@ import {
   removePluginAction,
   addIntegrationAction,
   removeProjectIntegrationsByTypeAction,
+  isAuthorizationGroupType,
 } from 'controllers/plugins';
 import { showModalAction } from 'controllers/modal';
 import {
@@ -188,8 +189,10 @@ export class InstancesSection extends Component {
     const { isGlobal, instanceType } = this.props;
     const data = {
       enabled: true,
-      integrationParameters: formData,
       name: formData.integrationName || INTEGRATION_NAMES_TITLES[instanceType],
+      ...(isAuthorizationGroupType
+        ? { authParams: formData }
+        : { integrationParameters: formData }),
     };
 
     this.props.addIntegrationAction(data, isGlobal, instanceType, this.navigateToNewIntegration);

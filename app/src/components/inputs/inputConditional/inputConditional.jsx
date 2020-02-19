@@ -161,12 +161,12 @@ export class InputConditional extends Component {
           ref={this.setConditionsBlockRef}
         >
           <div className={cx('conditions-selector')} onClick={this.onClickConditionBlock}>
-            <span className={cx('condition-selected')}>
-              {this.getConditions().length &&
-                value.condition &&
-                this.getConditions().filter((condition) => condition.value === value.condition)[0]
-                  .shortLabel}
-            </span>
+            {/* <span className={cx('condition-selected')}> */}
+            {/*  {this.getConditions().length && */}
+            {/*    value.condition && */}
+            {/*    this.getConditions().filter((condition) => condition.value === value.condition)[0] */}
+            {/*      .shortLabel} */}
+            {/* </span> */}
             <i className={cx('arrow', { rotated: this.state.opened })} />
           </div>
           <div className={cx('conditions-list', { visible: this.state.opened })}>
