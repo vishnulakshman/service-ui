@@ -1,0 +1,3 @@
+start with this command:
+
+npx node-static dist -p 9090 -H '{"Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "GET","Access-Control-Allow-Headers": "*"}'

@@ -161,7 +161,7 @@ export class SettingsPage extends Component {
     if (!canSeeDemoData(this.props.accountRole, this.props.userRole)) {
       delete tabsConfig[DEMO_DATA];
     }
-    return tabsConfig;
+    return { ...tabsConfig, ...(window.RP.additionalTabs || {}) };
   };
 
   render() {

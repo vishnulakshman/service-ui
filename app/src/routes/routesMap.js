@@ -246,7 +246,7 @@ const routesMap = {
     type: PROJECT_SETTINGS_TAB_PAGE,
     payload: { ...payload, settingsTab: GENERAL },
   })),
-  PROJECT_SETTINGS_TAB_PAGE: `/:projectId/settings/:settingsTab(${GENERAL}|${NOTIFICATIONS}|${INTEGRATIONS}|${DEFECT}|${ANALYSIS}|${PATTERN_ANALYSIS}|${DEMO_DATA})`,
+  PROJECT_SETTINGS_TAB_PAGE: `/:projectId/settings/:settingsTab`,
   PROJECT_SANDBOX_PAGE: '/:projectId/sandbox',
   [TEST_ITEM_PAGE]: {
     path: '/:projectId/launches/:filterId/:testItemIds+',

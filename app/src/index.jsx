@@ -30,6 +30,7 @@ import 'c3/c3.css';
 
 import App from './app';
 import { configureStore } from './store';
+import { initPluginRegistration, fetchPlugin } from './pluginInstaller';
 
 if (!process.env.production) {
   const query = parse(location.search, { ignoreQueryPrefix: true });
@@ -49,6 +50,9 @@ if (!process.env.production) {
 const queryParseHistory = qhistory(createHashHistory({ hashType: 'noslash' }), stringify, parse);
 
 const { store, initialDispatch } = configureStore(queryParseHistory, window.REDUX_STATE);
+
+initPluginRegistration(store);
+fetchPlugin();
 
 const rerenderApp = (TheApp) => {
   render(
